@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  db:
+    container_name: property-database
+    image: postgres:13.5
+    restart: always
+    environment:
+      - POSTGRES_DB=propertydb
+      - POSTGRES_USER=techniuser
+      - POSTGRES_PASSWORD=12345654321
+    ports:
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

@@ -4,15 +4,15 @@ import {
   Model,
   PrimaryKey,
   DataType,
+  ForeignKey,
+  BelongsTo,
   CreatedAt,
   UpdatedAt,
-  HasMany,
 } from "sequelize-typescript";
-import { Property } from "src/properties/properties.model";
-// import { Property } from "src/properties/properties.model";
+import { Agent } from "src/agent/agent.model";
 
-@Table({ modelName: "agents" })
-export class Agent extends Model<Agent> {
+@Table({ modelName: "properties" })
+export class Property extends Model<Property> {
   @PrimaryKey
   @Column({
     type: DataType.UUID,
@@ -23,25 +23,21 @@ export class Agent extends Model<Agent> {
   @Column
   name: string;
 
-  @Column({
-    unique: true,
-  })
-  email: string;
+  @Column
+  location: string;
 
   @Column
-  phone: string;
+  price: string;
 
   @Column
   image: string;
 
+  @ForeignKey(() => Agent)
   @Column
-  rating: number;
+  agentId: string;
 
-  @HasMany(() => Property)
-  property: Property[];
-
-  @Column
-  website: string;
+  @BelongsTo(() => Agent)
+  agent: Agent[];
 
   @CreatedAt
   created_at: string;

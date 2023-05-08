@@ -3,10 +3,8 @@ import {
   IsString,
   IsEmail,
   IsPhoneNumber,
-  IsOptional,
   IsNumber,
-} from 'class-validator';
-import { Transform } from 'class-transformer';
+} from "class-validator";
 
 export class AgentDto {
   @IsNotEmpty()
@@ -17,16 +15,15 @@ export class AgentDto {
   @IsEmail()
   email: string;
 
-  @IsNotEmpty()
-  @IsPhoneNumber()
+  @IsString()
   phone: string;
 
-  @IsOptional()
   @IsString()
-  @Transform((image) => image || undefined)
-  image?: string;
+  image: string;
 
-  @IsOptional()
+  @IsString()
+  website: string;
+
   @IsNumber()
-  rating?: number;
+  rating: number;
 }
